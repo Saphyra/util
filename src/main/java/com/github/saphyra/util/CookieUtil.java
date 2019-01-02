@@ -10,6 +10,14 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class CookieUtil {
+
+    /**
+     * Returns the cookie value with the given name.
+     *
+     * @param request request context
+     * @param name    name of the cookie
+     * @return Optional of value, or empty if cookie not found.
+     */
     public static Optional<String> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookieArray = request.getCookies();
         if (cookieArray == null) {
@@ -22,6 +30,13 @@ public class CookieUtil {
             .map(Cookie::getValue);
     }
 
+    /**
+     * Creates a new cookie.
+     *
+     * @param response response context
+     * @param name     name of the cookie
+     * @param value    value of the cookie
+     */
     public static void setCookie(HttpServletResponse response, String name, String value) {
         response.addCookie(createCookie(name, value));
     }
