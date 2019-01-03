@@ -31,21 +31,33 @@ public class CookieUtil {
     }
 
     /**
-     * Creates a new cookie.
+     * Creates a new cookie with default expiration.
      *
      * @param response response context
      * @param name     name of the cookie
      * @param value    value of the cookie
      */
     public static void setCookie(HttpServletResponse response, String name, String value) {
-        response.addCookie(createCookie(name, value));
+        setCookie(response, name, value, -1);
     }
 
-    private static Cookie createCookie(String name, String value) {
+    /**
+     * Creates a new cookie.
+     *
+     * @param response   response context
+     * @param name       name of the cookie
+     * @param value      value of the cookie
+     * @param expiration expiration of cookie.
+     */
+    public static void setCookie(HttpServletResponse response, String name, String value, int expiration) {
+        response.addCookie(createCookie(name, value, expiration));
+    }
+
+    private static Cookie createCookie(String name, String value, int expiration) {
         Cookie cookie = new Cookie(name, value);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(-1);
+        cookie.setMaxAge(expiration);
         return cookie;
     }
 }
