@@ -4,6 +4,10 @@ import java.util.UUID;
 
 public class IdGenerator {
     public String generateRandomId() {
-        return UUID.randomUUID().toString();
+        return randomUUID().toString();
+    }
+
+    public UUID randomUUID() {
+        return UUID.randomUUID();
     }
 }
