@@ -1,6 +1,7 @@
 package com.github.saphyra.util;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Component
 public class CookieUtil {
 
     /**
@@ -18,7 +20,7 @@ public class CookieUtil {
      * @param name    name of the cookie
      * @return Optional of value, or empty if cookie not found.
      */
-    public static Optional<String> getCookie(HttpServletRequest request, String name) {
+    public Optional<String> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookieArray = request.getCookies();
         if (cookieArray == null) {
             return Optional.empty();
@@ -37,7 +39,7 @@ public class CookieUtil {
      * @param name     name of the cookie
      * @param value    value of the cookie
      */
-    public static void setCookie(HttpServletResponse response, String name, String value) {
+    public void setCookie(HttpServletResponse response, String name, String value) {
         setCookie(response, name, value, -1);
     }
 
@@ -49,11 +51,11 @@ public class CookieUtil {
      * @param value      value of the cookie
      * @param expiration expiration of cookie.
      */
-    public static void setCookie(HttpServletResponse response, String name, String value, int expiration) {
+    public void setCookie(HttpServletResponse response, String name, String value, int expiration) {
         response.addCookie(createCookie(name, value, expiration));
     }
 
-    private static Cookie createCookie(String name, String value, int expiration) {
+    private Cookie createCookie(String name, String value, int expiration) {
         Cookie cookie = new Cookie(name, value);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
