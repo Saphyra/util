@@ -3,6 +3,7 @@ package com.github.saphyra.util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -28,12 +29,15 @@ public class CookieUtilTest {
     @Mock
     private HttpServletResponse response;
 
+    @InjectMocks
+    private CookieUtil cookieUtil;
+
     @Test
     public void testGetCookieShouldReturnEmptyWhenNoCookies() {
         //GIVEN
         when(request.getCookies()).thenReturn(null);
         //WHEN
-        Optional<String> result = CookieUtil.getCookie(request, COOKIE_NAME);
+        Optional<String> result = cookieUtil.getCookie(request, COOKIE_NAME);
         //THEN
         verify(request).getCookies();
         assertFalse(result.isPresent());
@@ -44,7 +48,7 @@ public class CookieUtilTest {
         //GIVEN
         when(request.getCookies()).thenReturn(new Cookie[0]);
         //WHEN
-        Optional<String> result = CookieUtil.getCookie(request, COOKIE_NAME);
+        Optional<String> result = cookieUtil.getCookie(request, COOKIE_NAME);
         //THEN
         verify(request).getCookies();
         assertFalse(result.isPresent());
@@ -57,7 +61,7 @@ public class CookieUtilTest {
         Cookie cookie2 = new Cookie("asd", "das");
         when(request.getCookies()).thenReturn(new Cookie[]{cookie, cookie2});
         //WHEN
-        Optional<String> result = CookieUtil.getCookie(request, COOKIE_NAME);
+        Optional<String> result = cookieUtil.getCookie(request, COOKIE_NAME);
         //THEN
         assertTrue(result.isPresent());
         verify(request).getCookies();
@@ -67,7 +71,7 @@ public class CookieUtilTest {
     @Test
     public void testSetCookie() {
         //WHEN
-        CookieUtil.setCookie(response, COOKIE_NAME, COOKIE_VALUE);
+        cookieUtil.setCookie(response, COOKIE_NAME, COOKIE_VALUE);
         //THEN
         ArgumentCaptor<Cookie> argumentCaptor = ArgumentCaptor.forClass(Cookie.class);
         verify(response).addCookie(argumentCaptor.capture());
