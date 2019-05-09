@@ -12,7 +12,7 @@
 
     <groupId>com.github.saphyra</groupId>
     <artifactId>${artifactId}</artifactId>
-    <version>1.2.2</version>
+    <version>1.3.0</version>
 
     <name>${projectName}</name>
     <description>${projectDescription}</description>
@@ -57,6 +57,14 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.1.6.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
