@@ -1,6 +1,5 @@
 package com.github.saphyra.util;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Component
 public class CookieUtil {
 
